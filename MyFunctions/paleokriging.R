@@ -1,9 +1,9 @@
 paleokriging <- function(dat, coord, y, x, new.coord, x.new, radius=NULL, k=8, do.R2=FALSE, v.fit=NULL)
 {
-  #Based on methods described by Martin Støíž in 2008
+  #Based on methods described by Martin Striz in 2008
   #These methods were used also to prepare climatic maps in Tolasz et al. 2007
   
-  #dat = data frame with paleo and elevation data for each station
+  #dat = data frame with paleo and elevation data for each point
   #coord = data frame or matrix with coordinates of points (in metres)
   #y = character name of a variable to be interpolated
   #x = character name of a variable describing altitude (in metres) of each climatic station
@@ -71,12 +71,11 @@ paleokriging <- function(dat, coord, y, x, new.coord, x.new, radius=NULL, k=8, d
     R2[i] <- RsquareAdj(mod)$r.squared
   }
   
-  params <- cbind(coord, a,b,res,R2)
+  params <- cbind(coord, a, b, res, R2)
   params <- params[complete.cases(params),]
   
   #interpolate model parametres using krige
   f.loc <- paste("~", colnames(coord)[1], "+", colnames(coord)[2], sep="")
-  
   
   a.krige <- krige(a~1, locations = as.formula(f.loc), data=params, newdata=new.coord, model=v.fit)
   b.krige <- krige(b~1, locations = as.formula(f.loc), data=params, newdata=new.coord, model=v.fit)
@@ -101,5 +100,4 @@ paleokriging <- function(dat, coord, y, x, new.coord, x.new, radius=NULL, k=8, d
   {
     return(result)
   }
-  
 }
