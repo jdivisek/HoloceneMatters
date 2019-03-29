@@ -1,7 +1,6 @@
-﻿#####################################################################################
-#		   INTERPOLATE POLLEN COMPOSITION GRADINETS                         #
 #####################################################################################
-
+#		               INTERPOLATE POLLEN COMPOSITION GRADINETS                         #
+#####################################################################################
 
 library(spdep)
 library(raster)
@@ -12,10 +11,16 @@ library(Metrics)
 library(vegan)
 library(fields)
 
+#source required functions
+myfunctions <- list.files(paste(getwd(), "/MyFunctions", sep=""), full.names=TRUE)
+for (i in 1:length(myfunctions))
+{
+  source(myfunctions[i])
+}
+
 ###READ DATA-------------------------------------------------------------------------------
 Alt <- raster(paste(getwd(), "/rasters/Alt.tif", sep=""))
 country <- readOGR(paste(getwd(), "/shapes/country_line_WGS84web.shp", sep=""))
-
 
 ###PERIOD1 - LATE GLACIAL--------------------------------------------------------------
 period1 <- read.delim("period1.txt", header=T, row.names=1)
@@ -59,14 +64,12 @@ points(period2[, c("x", "y")], cex=(decostand(period2$PCO_1, "range")*2)+1)
 writeRaster(temp2, filename = paste(getwd(), "/history_rasters/temp2.tif", sep=""), format="GTiff", overwrite=TRUE)
 temp2 <- raster(paste(getwd(), "/history_rasters/temp2.tif", sep=""))
 
-
 ###PERIOD3 - PRE-NEOLITHIC--------------------------------------------------------------
 period3 <- read.delim("period3.txt", header=T, row.names=1)
 
 period3$Alt <- extract(Alt, period3[, c("x", "y")])
 
 dem.df <- as.data.frame(Alt, xy=TRUE)
-
 
 step3.dem <- paleokriging(dat=period3, coord=period3[, c("x", "y")], y = "PCO1b", 
                           x = "Alt", new.coord = dem.df[, c("x", "y")], x.new = dem.df$Alt, 
@@ -81,7 +84,6 @@ points(period3[, c("x", "y")], cex= (decostand(period3$PCO1b, "range")*2)+1)
 
 writeRaster(step3, filename = paste(getwd(), "/history_rasters/step3.tif", sep=""), format="GTiff", overwrite=TRUE)
 step3 <- raster(paste(getwd(), "/history_rasters/step3.tif", sep=""))
-
 
 ###PERIOD4 - LATE GLACIAL--------------------------------------------------------------
 period4 <- read.delim("period4_WGS84web.txt", header=T, row.names=1)
@@ -104,7 +106,6 @@ points(period4[, c("x", "y")], cex= (decostand(period4$PCO1b, "range")*2)+1)
 writeRaster(step4, filename = paste(getwd(), "/history_rasters/step4.tif", sep=""), format="GTiff", overwrite=TRUE)
 step4 <- raster(paste(getwd(), "/history_rasters/step4.tif", sep=""))
 
-
 ###PERIOD5--------------------------------------------------------------
 period5 <- read.delim("period5_WGS84web.txt", header=T, row.names=1)
 
@@ -125,7 +126,6 @@ points(period5[, c("x", "y")], cex=(decostand(period5$PCO_1, "range")*2)+1)
 
 writeRaster(taiga5, filename = paste(getwd(), "/history_rasters/taiga5.tif", sep=""), format="GTiff", overwrite=TRUE)
 taiga5 <- raster(paste(getwd(), "/history_rasters/taiga5.tif", sep=""))
-
 
 ###MAPS-------------------------------------------------------------------------
 windows(8.44, 8.07)#812, 777
