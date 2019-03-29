@@ -2,10 +2,8 @@
 #		IMPORT VEGETATION PLOT DATA AND MAP SPECIES RICHNESS		#
 #################################################################################
 
-
 ###IMPORT DATA----------------------------------------------------------------
 #already selected plots
-
 stijeh <- read.delim("stijeh.sel.f.txt", header=T, row.names = 1) #dark conifereous forests
 svetle <- read.delim("svetle.sel.f.txt", header=T, row.names = 1) #light foresst
 travniky <- read.delim("travniky.sel.f.txt", header=T, row.names = 1) #semi-dry and steppe grasslands
@@ -23,7 +21,6 @@ shades <- colorRampPalette(c("gray80", "white"))
 
 ##Maps of total species richness----------------------------------------------
 ##Dark conifereous forests----------------------------------------------------
-
 # windows(9.89, 6.55)
 tiff("Plotmap_stijeh_tot.rich.tif", 9.89, 6.55, units = "in", res = 400, compression = "lzw")
 par(mar=c(3,4.5,3,0))
@@ -56,11 +53,9 @@ text(2200000, 6070000, "HU")
 text(1840000, 6150000, "AT")
 text(2550000, 6220000, "UA")
 
-
 dev.off()
 
 ##Light forests------------------------------------------------------
-
 # windows(9.89, 6.55)
 tiff("Plotmap_svetle_tot.rich.tif", 9.89, 6.55, units = "in", res = 400, compression = "lzw")
 par(mar=c(3,4.5,3,0))
@@ -96,7 +91,6 @@ text(2550000, 6220000, "UA")
 dev.off()
 
 ##Grasslands------------------------------------------------------
-
 # windows(9.89, 6.55)
 tiff("Plotmap_travniky_tot.rich.tif", 9.89, 6.55, units = "in", res = 400, compression = "lzw")
 par(mar=c(3,4.5,3,0))
@@ -133,7 +127,7 @@ text(2550000, 6220000, "UA")
 dev.off()
 
 ##Maps of diagnostic species richness----------------------------------------------
-##Stinne jehlicnate lesy------------------------------------------------------
+##Dark coniferous forests------------------------------------------------------
 # windows(9.89, 6.55)
 tiff("Plotmap_stijeh_dg.rich.tif", 9.89, 6.55, units = "in", res = 400, compression = "lzw")
 par(mar=c(3,4.5,3,0))
@@ -168,7 +162,7 @@ text(2550000, 6220000, "UA")
 
 dev.off()
 
-##Svetle lesy------------------------------------------------------
+##Light forests------------------------------------------------------
 # windows(9.89, 6.55)
 tiff("Plotmap_svetle_dg.rich.tif", 9.89, 6.55, units = "in", res = 400, compression = "lzw")
 par(mar=c(3,4.5,3,0))
@@ -203,7 +197,7 @@ text(2550000, 6220000, "UA")
 
 dev.off()
 
-##Travniky------------------------------------------------------
+##Grasslands------------------------------------------------------
 # windows(9.89, 6.55)
 tiff("Plotmap_travniky_dg.rich.tif", 9.89, 6.55, units = "in", res = 400, compression = "lzw")
 par(mar=c(3,4.5,3,0))
