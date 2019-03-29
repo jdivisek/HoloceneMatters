@@ -9,8 +9,8 @@ tiff("Correlation_matrix.tif", 9.62, 9.02, units = "in", res = 400, compression 
 cor.mat <- cor(svetle[, c(env.vars[-1], hist.vars[-6], "Releve_area")])
 colnames(cor.mat) <- c("Terrain ruggedness index", "Heat load index", "Topographic wetness index", "Soil pH", "Mean annual temperature",
                        "Temperature seasonality", "Annual precipitation", "Precipitation seasonality", "Area of forests",
-                       "Area of grasslands", "Area of arable land", "Build-up area", "Landscape diversity", "Temperateness in Late Glacial",
-                       "Temperateness at Holocene onset", "Landscape openness in Pre-Neolithic", "Landscape openness in Late Neolithic", "Representation of taiga in Late Prehistory",
+                       "Area of grasslands", "Area of arable land", "Build-up area", "Landscape diversity", "Temperateness in the Late Glacial",
+                       "Temperateness at the Holocene onset", "Landscape openness in the Pre-Neolithic", "Landscape openness in the Late Neolithic", "Representation of taiga in the Late Prehistory",
                        "Plot size")
 rownames(cor.mat) <- colnames(cor.mat)
 
@@ -29,8 +29,8 @@ tiff("Correlation_matrix.tif", 9.62, 9.02, units = "in", res = 400, compression 
 cor.mat <- cor(travniky[, c(env.vars[-1], hist.vars[-6], "Releve_area")])
 colnames(cor.mat) <- c("Terrain ruggedness index", "Heat load index", "Topographic wetness index", "Soil pH", "Mean annual temperature",
                        "Temperature seasonality", "Annual precipitation", "Precipitation seasonality", "Area of forests",
-                       "Area of grasslands", "Area of arable land", "Build-up area", "Landscape diversity", "Temperateness in Late Glacial",
-                       "Temperateness at Holocene onset", "Landscape openness in Pre-Neolithic", "Landscape openness in Late Neolithic", "Representation of taiga in Late Prehistory",
+                       "Area of grasslands", "Area of arable land", "Build-up area", "Landscape diversity", "Temperateness in the Late Glacial",
+                       "Temperateness at the Holocene onset", "Landscape openness in the Pre-Neolithic", "Landscape openness in the Late Neolithic", "Representation of taiga in the Late Prehistory",
                        "Plot size")
 rownames(cor.mat) <- colnames(cor.mat)
 
@@ -50,8 +50,8 @@ tiff("Correlation_matrix.tif", 9.62, 9.02, units = "in", res = 400, compression 
 cor.mat <- cor(stijeh[, c(env.vars[-1], hist.vars[-6], "Releve_area")])
 colnames(cor.mat) <- c("Terrain ruggedness index", "Heat load index", "Topographic wetness index", "Soil pH", "Mean annual temperature",
                        "Temperature seasonality", "Annual precipitation", "Precipitation seasonality", "Area of forests",
-                       "Area of grasslands", "Area of arable land", "Build-up area", "Landscape diversity", "Temperateness in Late Glacial",
-                       "Temperateness at Holocene onset", "Landscape openness in Pre-Neolithic", "Landscape openness in Late Neolithic", "Representation of taiga in Late Prehistory",
+                       "Area of grasslands", "Area of arable land", "Build-up area", "Landscape diversity", "Temperateness in the Late Glacial",
+                       "Temperateness at the Holocene onset", "Landscape openness in the Pre-Neolithic", "Landscape openness in the Late Neolithic", "Representation of taiga in the Late Prehistory",
                        "Plot size")
 rownames(cor.mat) <- colnames(cor.mat)
 
