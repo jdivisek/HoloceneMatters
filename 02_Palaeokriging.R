@@ -1,5 +1,5 @@
 #####################################################################################
-#		               INTERPOLATE POLLEN COMPOSITION GRADINETS                         #
+#		     INTERPOLATE POLLEN COMPOSITION GRADINETS                         #
 #####################################################################################
 
 library(spdep)
