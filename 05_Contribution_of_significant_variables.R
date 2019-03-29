@@ -15,7 +15,6 @@ for(i in 1:3)
 names(mod2.p) <- c("p2.stijeh", "p2.svetle", "p2.travniky")
 mod2.p
 
-
 set.seed(1234)
 mod2sig.stijeh <-  gbm.step(data=stijeh, gbm.x = rownames(mod2.p$p2.stijeh)[mod2.p$p2.stijeh$p2.stijeh < 0.05], 
                          gbm.y = "tot_rich", family = "poisson",
@@ -53,7 +52,6 @@ head(plot.data)
 barplot(plot.data[, c(3,2,1)], beside=F, horiz=T, col=c("gold1", "dodgerblue3", "gray40"),
         border=F, main="Total species richness", names.arg = c("Dark coniferous\nforests", "Semi-dry and steppe\ngrasslands", "Light forests"),
         las=1)
-
 
 ###diagnostic species richness--------------------------------------------------------------
 mod4.p <- list()
@@ -104,7 +102,6 @@ barplot(plot.data[, c(3,2,1)], beside=F, horiz=T, col=c("gold1", "dodgerblue3", 
         las=1)
 
 ###BARPLOTS-------------------------------------------------------------------------------------
-
 par(mfrow=c(1,2), mar=c(5,0.5,2,1), oma=c(0,9,0,6), xpd=TRUE)
 
 plot.data <- matrix(data=NA, ncol=3, nrow=3, byrow = F)
