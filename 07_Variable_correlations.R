@@ -14,7 +14,6 @@ colnames(cor.mat) <- c("Terrain ruggedness index", "Heat load index", "Topograph
                        "Plot size")
 rownames(cor.mat) <- colnames(cor.mat)
 
-
 cor.col  <- colorRampPalette(c("#67001F", "#B2182B", "#D6604D", "#F4A582",
                                "#FDDBC7", "#FFFFFF", "#D1E5F0", "#92C5DE",
                                "#4393C3", "#2166AC", "#053061"))
@@ -34,7 +33,6 @@ colnames(cor.mat) <- c("Terrain ruggedness index", "Heat load index", "Topograph
                        "Temperateness at Holocene onset", "Landscape openness in Pre-Neolithic", "Landscape openness in Late Neolithic", "Representation of taiga in Late Prehistory",
                        "Plot size")
 rownames(cor.mat) <- colnames(cor.mat)
-
 
 cor.col  <- colorRampPalette(c("#67001F", "#B2182B", "#D6604D", "#F4A582",
                                "#FDDBC7", "#FFFFFF", "#D1E5F0", "#92C5DE",
@@ -56,7 +54,6 @@ colnames(cor.mat) <- c("Terrain ruggedness index", "Heat load index", "Topograph
                        "Temperateness at Holocene onset", "Landscape openness in Pre-Neolithic", "Landscape openness in Late Neolithic", "Representation of taiga in Late Prehistory",
                        "Plot size")
 rownames(cor.mat) <- colnames(cor.mat)
-
 
 cor.col  <- colorRampPalette(c("#67001F", "#B2182B", "#D6604D", "#F4A582",
                                "#FDDBC7", "#FFFFFF", "#D1E5F0", "#92C5DE",
