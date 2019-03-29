@@ -71,7 +71,6 @@ crs(pred1.stijeh) <- crs(Alt)
 mor.cor <- correlog(stijeh[, c("POINT_X", "POINT_Y")], mod1.stijeh$residuals)
 plot(mor.cor)
 
-
 #historical factors
 set.seed(1234)
 mod2.stijeh <-  gbm.step(data=stijeh, gbm.x = c(env.vars[-1], hist.vars[-6], "Releve_area"), 
@@ -112,7 +111,6 @@ crs(pred2.stijeh) <- crs(Alt)
 mor.cor <- correlog(stijeh[, c("POINT_X", "POINT_Y")], mod2.stijeh$residuals)
 plot(mor.cor)
 
-
 ###Cross-validation progress
 my.col <- viridis(3)
 
@@ -149,7 +147,6 @@ lines(rep(mod2.stijeh$gbm.call$best.trees, 2), y.lim + c(-1, 1), col=my.col[1])
 lines(c(-800, x.lim[2] + 800), rep(min(c(mod1.stijeh$cv.values, mod2.stijeh$cv.values, mod22.stijeh$cv.values)),2), col="red")
 legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
        col = my.col[c(3,2,1)], horiz=TRUE, bty = "o", bg = "white")
-
 
 ###habitat specialists------------------------------------------------------------------
 #current environment only
@@ -264,7 +261,6 @@ lines(c(-800, x.lim[2] + 800), rep(min(c(mod3.stijeh$cv.values, mod4.stijeh$cv.v
 legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
        col = my.col[c(3,2,1)], horiz=TRUE, bty = "o", bg = "white")
 
-
 ###LIGHT FORESTS-------------------------------------------------------------------------
 ###all species---------------------------------------------------------------------------
 #current environment only
@@ -315,7 +311,6 @@ mod22.svetle <-  gbm.step(data=svetle, gbm.x = c(hist.vars[-6], "Releve_area"),
                           tree.complexity = 5, learning.rate = 0.001, 
                           bag.fraction = 0.5, step.size=100, max.trees = 30000)
 
-
 mod2.svetle$gbm.call$best.trees
 hist(mod2.svetle$residuals)
 mod2.svetle$contributions
@@ -342,7 +337,6 @@ crs(pred2.svetle) <- crs(Alt)
 mor.cor <- correlog(svetle[, c("POINT_X", "POINT_Y")], mod2.svetle$residuals)
 plot(mor.cor)
 round(mor.cor[,3],3)
-
 
 ###Cross-validation progress
 my.col <- viridis(3)
@@ -381,7 +375,6 @@ lines(c(-800, x.lim[2] + 800), rep(min(c(mod1.svetle$cv.values, mod2.svetle$cv.v
 legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
        col = my.col[c(3,2,1)], horiz=TRUE, bty = "o", bg = "white")
 
-
 ###diagnostic species------------------------------------------------------------------
 #current environment only
 set.seed(1234)
@@ -416,7 +409,6 @@ crs(pred3.svetle) <- crs(Alt)
 mor.cor <- correlog(svetle[, c("POINT_X", "POINT_Y")], mod3.svetle$residuals)
 plot(mor.cor)
 round(mor.cor[,3],3)
-
 
 #historical factors
 set.seed(1234)
@@ -550,7 +542,6 @@ mod22.travniky <- gbm.step(data=travniky, gbm.x = c(hist.vars[-6], "Releve_area"
                            tree.complexity = 5, learning.rate = 0.003, 
                            bag.fraction = 0.5, step.size=100, max.trees = 30000)
 
-
 mod2.travniky$gbm.call$best.trees
 hist(mod2.travniky$residuals)
 mod2.travniky$contributions
@@ -664,7 +655,6 @@ mod42.travniky <- gbm.step(data=travniky, gbm.x = c(hist.vars[-6], "Releve_area"
                            tree.complexity = 5, learning.rate = 0.003, 
                            bag.fraction = 0.5, step.size=100, max.trees = 30000)
 
-
 mod4.travniky$gbm.call$best.trees
 hist(mod4.travniky$residuals)
 mod4.travniky$contributions
@@ -762,9 +752,7 @@ contrib4 <- do.call(cbind.data.frame, contrib4)[,c(2,4,6)]
 colnames(contrib4) <- c("Dark coniferous forests", "Light forests", "Semi-dry and steppe grasslands")
 round(contrib4, 1)
 
-
 ###PARTIAL DEPENDENCE PLOTS---------------------------------------------------------------------
-
 ###Dark coniferous forests-----------------------------------------------------
 mod1.stijeh$contributions
 
@@ -788,7 +776,6 @@ for(q in c(1:4))#1:4
 }
 rm(brt.models)
 
-
 par(mfrow=c(2,3), mar=c(5,5,3,1))
 for(i in 1:6)
 {
@@ -799,8 +786,6 @@ for(i in 1:6)
 
 plot(pdp.stijeh$mod4[[i]], type="p", lwd=1.3, main=names(pdp.stijeh$mod4)[i],
      ylab="No. species", col="gray90")
-
-
 
 ###Light forests-------------------------------------------------------------
 mod1.svetle$contributions
@@ -824,7 +809,6 @@ for(q in c(1:4))
   names(pdp.svetle[[q]]) <- as.character(brt.models[[q]]$contributions$var)#[1:6]
 }
 rm(brt.models)
-
 
 par(mfrow=c(2,3), mar=c(5,5,3,1))
 for(i in 1:6)
@@ -865,7 +849,6 @@ for(i in 1:6)
   points(pdp.travniky$mod4[[i]], pch=16)
 }
 
-
 ###PREDICTION MAPS-----------------------------------------------------
 library(raster)
 library(rgdal)
@@ -881,7 +864,6 @@ layout(matrix(1:6, ncol=2, nrow=3, byrow = F))
 par(mar=c(1, 0, 3, 0), oma=c(1.5, 3.5, 0, 2.5))
 
 #Light forests
-
 #ArcGIS breaks
 breaks <- c(12.000000, 19.684729, 23.527094, 27.369458, 30.955665, 34.541872, 38.384236, 42.995074, 49.399015, 64.000000)
 breaks[1] <- min(c(minValue(pred1.svetle), minValue(pred2.svetle)))
@@ -905,7 +887,6 @@ lines(x=c(2300000, 2400000), y=c(6050000, 6050000), lwd=3, col="black", lend=2)
 text(2350000, 6050000, "100 km", col="black", cex=1.1, pos=3, font=2)
 
 #Semi-dry and steppe grasslands
-
 #ArcGIS breaks
 breaks <- c(21.000000, 26.587045, 30.230769, 33.388664, 36.303644, 39.461538, 43.591093, 48.935223, 56.708502, 80.271255)
 breaks[1] <- min(c(minValue(pred1.travniky), minValue(pred2.travniky)))
@@ -929,7 +910,6 @@ lines(x=c(2300000, 2400000), y=c(6050000, 6050000), lwd=3, col="black", lend=2)
 text(2350000, 6050000, "100 km", col="black", cex=1.1, pos=3, font=2)
 
 #Dark coniferous forests
-
 #ArcGIS breaks
 breaks <- c(9.000000, 16.780392, 20.796078, 24.309804, 27.823529, 31.337255, 34.850980, 38.866667, 43.886275, 73.000000)
 breaks[1] <- min(c(minValue(pred1.stijeh), minValue(pred2.stijeh)))
@@ -962,7 +942,6 @@ layout(matrix(1:6, ncol=2, nrow=3, byrow = F))
 par(mar=c(1, 0, 3, 0), oma=c(1.5, 3.5, 0, 2.5))
 
 #Light forests
-
 #ArcGIS breaks
 breaks <- c(2.000000, 3.937255, 4.980392, 6.992157, 8.929412, 10.941176, 12.952941, 14.964706, 16.976471, 21.000000)
 breaks[1] <- min(c(minValue(pred3.svetle), minValue(pred4.svetle)))
@@ -986,7 +965,6 @@ lines(x=c(2300000, 2400000), y=c(6050000, 6050000), lwd=3, col="black", lend=2)
 text(2350000, 6050000, "100 km", col="black", cex=1.1, pos=3, font=2)
 
 #Semi-dry and steppe grasslands
-
 #ArcGIS breaks
 breaks <- c(9.000000, 12.917647, 15.964706, 17.996078, 20.898039, 23.945098, 27.862745, 31.925490, 36.858824, 46.000000)
 breaks[1] <- min(c(minValue(pred3.travniky), minValue(pred4.travniky)))
@@ -1009,9 +987,7 @@ plot(pred4.travniky, breaks=breaks, axis.args=arg, legend.only=TRUE, smallplot= 
 lines(x=c(2300000, 2400000), y=c(6050000, 6050000), lwd=3, col="black", lend=2)
 text(2350000, 6050000, "100 km", col="black", cex=1.1, pos=3, font=2)
 
-
 #Dark coniferous forests
-
 #breaks
 breaks <- seq(1,10)
 breaks[1] <- min(c(minValue(pred3.stijeh), minValue(pred4.stijeh)))
@@ -1035,4 +1011,3 @@ lines(x=c(2300000, 2400000), y=c(6050000, 6050000), lwd=3, col="black", lend=2)
 text(2350000, 6050000, "100 km", col="black", cex=1.1, pos=3, font=2)
 
 dev.off()
-
