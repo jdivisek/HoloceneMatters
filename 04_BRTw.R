@@ -2,7 +2,6 @@
 #                BOOSTED REGRESSION TREES WITH PLOT WEIGHTS				#
 #########################################################################################
 
-
 library(dismo)
 library(raster)
 library(gbm)
@@ -20,10 +19,8 @@ dim(paleo.coords)
 plot(paleo.coords)
 colnames(paleo.coords) <- c("POINT_X", "POINT_Y")
 
-
 ###DARK CONIFEROUS FORESTS----------------------------------------------------------------
 #create weights
-
 d <- as.matrix(dist(rbind(stijeh[, c("POINT_X", "POINT_Y")], paleo.coords)))
 dim(d)
 d <- d[(nrow(stijeh)+1):nrow(d),1:nrow(stijeh)]
@@ -43,7 +40,6 @@ colPoints(stijeh$POINT_X, stijeh$POINT_Y, w.stijeh)
 colPoints(stijeh$POINT_X, stijeh$POINT_Y, w.stijeh^2)
 
 rm(d)
-
 
 ###BRT-----------------------------------------------------------------------------------
 Releve_area <- 400
@@ -82,7 +78,6 @@ crs(pred1w.stijeh) <- crs(Alt)
 #Spatial autocorrelation in residuals
 mor.cor <- correlog(stijeh[, c("POINT_X", "POINT_Y")], mod1w.stijeh$residuals)
 plot(mor.cor)
-
 
 #historical factors
 set.seed(1234)
@@ -124,7 +119,6 @@ crs(pred2w.stijeh) <- crs(Alt)
 mor.cor <- correlog(stijeh[, c("POINT_X", "POINT_Y")], mod2w.stijeh$residuals)
 plot(mor.cor)
 
-
 ###Cross-validation progress
 my.col <- viridis(3)
 
@@ -161,7 +155,6 @@ lines(rep(mod2w.stijeh$gbm.call$best.trees, 2), y.lim + c(-1, 1), col=my.col[1])
 lines(c(-800, x.lim[2] + 800), rep(min(c(mod1w.stijeh$cv.values, mod2w.stijeh$cv.values, mod22w.stijeh$cv.values)),2), col="red")
 legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
        col = my.col[c(3,2,1)], horiz=TRUE, bty = "o", bg = "white")
-
 
 ###habitat specialists------------------------------------------------------------------
 #current environment only
@@ -276,7 +269,6 @@ lines(c(-800, x.lim[2] + 800), rep(min(c(mod3w.stijeh$cv.values, mod4w.stijeh$cv
 legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
        col = my.col[c(3,2,1)], horiz=TRUE, bty = "o", bg = "white")
 
-
 ###LIGHT FORESTS-------------------------------------------------------------------------
 #create weights
 
@@ -298,7 +290,6 @@ range(w.svetle)
 plot(paleo.coords, pch=16, col="red", cex=1.5)
 colPoints(svetle$POINT_X, svetle$POINT_Y, w.svetle)
 colPoints(svetle$POINT_X, svetle$POINT_Y, w.svetle^2)
-
 
 ###BRT-----------------------------------------------------------------------------------
 Releve_area <- 400
@@ -353,7 +344,6 @@ mod22w.svetle <-  gbm.step(data=svetle, gbm.x = c(hist.vars[-6], "Releve_area"),
                           tree.complexity = 5, learning.rate = 0.001, 
                           bag.fraction = 0.5, step.size=100, max.trees = 30000)
 
-
 mod2w.svetle$gbm.call$best.trees
 hist(mod2w.svetle$residuals)
 mod2w.svetle$contributions
@@ -380,7 +370,6 @@ crs(pred2w.svetle) <- crs(Alt)
 mor.cor <- correlog(svetle[, c("POINT_X", "POINT_Y")], mod2w.svetle$residuals)
 plot(mor.cor)
 round(mor.cor[,3],3)
-
 
 ###Cross-validation progress
 my.col <- viridis(3)
@@ -419,7 +408,6 @@ lines(c(-800, x.lim[2] + 800), rep(min(c(mod1w.svetle$cv.values, mod2w.svetle$cv
 legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
        col = my.col[c(3,2,1)], horiz=TRUE, bty = "o", bg = "white")
 
-
 ###diagnostic species------------------------------------------------------------------
 #current environment only
 set.seed(1234)
@@ -454,7 +442,6 @@ crs(pred3w.svetle) <- crs(Alt)
 mor.cor <- correlog(svetle[, c("POINT_X", "POINT_Y")], mod3w.svetle$residuals)
 plot(mor.cor)
 round(mor.cor[,3],3)
-
 
 #historical factors
 set.seed(1234)
@@ -536,7 +523,6 @@ legend("top", legend=c("~ E", "~ H", "~ E + H"), lty = 1, lwd = 3,
 
 ###SEMI-DRY AND STEPPE GRASSLANDS------------------------------------------------------
 #create weights
-
 d <- as.matrix(dist(rbind(travniky[, c("POINT_X", "POINT_Y")], paleo.coords)))
 dim(d)
 d <- d[(nrow(travniky)+1):nrow(d),1:nrow(travniky)]
@@ -563,7 +549,6 @@ Releve_area <- as.data.frame(Releve_area)
 
 #all species---------------------------------------------------------------------------
 #current environment only
-
 set.seed(1234)
 mod1w.travniky <- gbm.step(data=travniky, gbm.x = c(env.vars[-1], "Releve_area"), 
                           gbm.y = "Pocet_druhu_celkem", family = "poisson", site.weights = w.travniky,
@@ -610,7 +595,6 @@ mod22w.travniky <- gbm.step(data=travniky, gbm.x = c(hist.vars[-6], "Releve_area
                            gbm.y = "Pocet_druhu_celkem", family = "poisson", site.weights = w.travniky,
                            tree.complexity = 5, learning.rate = 0.003, 
                            bag.fraction = 0.5, step.size=100, max.trees = 30000)
-
 
 mod2w.travniky$gbm.call$best.trees
 hist(mod2w.travniky$residuals)
@@ -725,7 +709,6 @@ mod42w.travniky <- gbm.step(data=travniky, gbm.x = c(hist.vars[-6], "Releve_area
                            tree.complexity = 5, learning.rate = 0.003, 
                            bag.fraction = 0.5, step.size=100, max.trees = 30000)
 
-
 mod4w.travniky$gbm.call$best.trees
 hist(mod4w.travniky$residuals)
 mod4w.travniky$contributions
@@ -823,9 +806,7 @@ contrib4 <- do.call(cbind.data.frame, contrib4)[,c(2,4,6)]
 colnames(contrib4) <- c("Dark coniferous forests", "Light forests", "Semi-dry and steppe grasslands")
 round(contrib4, 1)
 
-
 ###PARTIAL DEPENDENCE PLOTS---------------------------------------------------------------------
-
 ###Dark coniferous forests-----------------------------------------------------
 mod1w.stijeh$contributions
 
@@ -849,7 +830,6 @@ for(q in c(1:4))#1:4
 }
 rm(brt.models)
 
-
 par(mfrow=c(2,3), mar=c(5,5,3,1))
 for(i in 1:6)
 {
@@ -860,8 +840,6 @@ for(i in 1:6)
 
 plot(pdpw.stijeh$mod4w[[i]], type="p", lwd=1.3, main=names(pdpw.stijeh$mod4w)[i],
      ylab="No. species", col="gray90")
-
-
 
 ###Light forests-------------------------------------------------------------
 mod1w.svetle$contributions
@@ -885,7 +863,6 @@ for(q in c(1:4))
   names(pdpw.svetle[[q]]) <- as.character(brt.models[[q]]$contributions$var)#[1:6]
 }
 rm(brt.models)
-
 
 par(mfrow=c(2,3), mar=c(5,5,3,1))
 for(i in 1:6)
@@ -925,6 +902,3 @@ for(i in 1:6)
        ylab="No. species", col="blue")
   points(pdpw.travniky$mod4w[[i]], pch=16)
 }
-
-
-
